@@ -22,9 +22,27 @@ def decode_save(save):
     return save
 
 
+# Helper function to evaluate stuff like [26, '>=', '25']
+# only works on integers
+def evaluate_cond(val1, comp, val2):
+    val1, val2 = int(val1), int(val2)
+    if comp == '==':
+        return val1 == val2
+    elif comp == '>=':
+        return val1 >= val2
+    elif comp == '>':
+        return val1 > val2
+    elif comp == '<=':
+        return val1 <= val2
+    elif comp == '<':
+        return val1 < val2
+    raise ValueError('Comparator {} not supported!'.format(comp))
+
+
 # This array essentially describes all the steps required in decoding a save
 # The order of this array matters, since many steps require the values from previous steps
-formats = [
+def get_formats():
+    return [
            {'format': 'Uint16', 'key': 'saveVersion'},
            {'format': 'Uint16', 'key': 'newField32'},
            {'format': 'Uint16', 'key': 'playfabSeason'},
@@ -257,4 +275,4 @@ formats = [
                 {'format': 'Int8', 'key': 'new5'},
                 {'format': 'Int8', 'key': 'new6'}
             ]}
-]
+    ]
