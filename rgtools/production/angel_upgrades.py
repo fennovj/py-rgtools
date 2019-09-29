@@ -20,9 +20,18 @@ angel_upgrades = [
         ('cathedrals', 'dragonsbreath_effect', lambda x: 0.65*(x**0.65), 'percent'),
         # Below bonus does not affect gg/db
         ('cathedrals', 'spell_tier', lambda x: 0.02 * math.log(1+x), 'additive')
-    ]
-    ('spells_time', 'factionfind', lambda x: 0.7*(x**0.7), 'percent'),
+    ],
+    ('spells_time_game', 'factionfind', lambda x: 0.7*(x**0.7), 'percent'),
     ([], ('mana_max', 'mana_regen', 'factionfind', 'assistants'), (200, 200, 200, 200), 'percent')
 
 
+]
+
+# Miscelaneous other upgrades
+other_upgrades = [
+    [
+        # Crop rotation
+        ([], 'farm_production', 100, 'percent'),
+        ([], 'assistants', 1, 'additive')
+    ]
 ]

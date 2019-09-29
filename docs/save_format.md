@@ -84,4 +84,18 @@ The stats have this layout:
 
 ## Trophies
 
+A list of all unlocked trophies. Trophies that aren't unlocked, are not included in the save. The following items:
+- id: The name of the trophiy. Translation can (partly) [be found here](https://github.com/dox4242/dox4242.github.io/blob/a94559278f1b8adb6fb99ff0934dd97a44c510e2/lib/util.js#L642)
+- u1: Seemingly always False
+- u2: Seemingly always 0
+
 ## Upgrades
+
+For every upgrade, the following items:
+- id: The name of the upgrade. Translation can (partly) [be found here](https://github.com/dox4242/dox4242.github.io/blob/a94559278f1b8adb6fb99ff0934dd97a44c510e2/lib/util.js#L1439)
+- s: ?
+- u1: Wether or not the upgrade is purchased
+- u2: Seemingly always False?
+- u3: ?
+
+Upgrades that are not visible are not included in the save (For example, bloodlines that you didn't purchase)

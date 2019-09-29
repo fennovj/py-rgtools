@@ -18,6 +18,10 @@ class RealmGrinderSave:
         '''
         return self.save[arg]
 
+    def __str__(self):
+        'Use string representation from the dictionary'
+        return str(self.save)
+
     def __init__(self, save={}):
         '''
         Initialize a RG save object. Optionally with a pre-filled dictionary.
@@ -34,14 +38,29 @@ class RealmGrinderSave:
         '''
         # Get the subdict, then the key, and just index. Will raise KeyError if key doesn't exist
         keys = key.split('/')
+        key = keys[-1]
         subdict = self._get_subdict(keys[:-1])
 
-        if isinstance(subdict, list):
+        # First, special cases
+        if key == '_base':
+            return self.save
+        elif key == '_len':
+            return len(subdict)
+        elif key == '_this_r':
+            return subdict['stats'] + subdict['statsReset']
+        elif key == '_max_this_r':
+            return max(subdict['stats'], subdict['statsReset'])
+        elif key == '_max':
+            return max(subdict.values())
+        elif key == '_max_arr':
+            return max(subdict)
+
+        elif isinstance(subdict, list):
             # If subdict is a list, then the final key must be an integer
-            return subdict[int(keys[-1])]
+            return subdict[int(key)]
         else:
             # Subdict is a dictionary, we can index it normally
-            return subdict[keys[-1]]
+            return subdict[key]
 
     def _get_subdict(self, dirkeys, create=False):
         '''

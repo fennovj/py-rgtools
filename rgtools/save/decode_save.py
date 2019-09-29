@@ -1,8 +1,9 @@
 import base64
 import re
 import zlib
+import json
 
-from .formats import get_formats
+from rgtools.raw.save_formats import get_formats
 from .realmgrindersave import RealmGrinderSave
 from .realmgrinderstruct import RealmGrinderByteArray
 
@@ -123,3 +124,9 @@ def read_save(fname):
         _apply_rule(rule, rgsave, rgdata)
 
     return rgsave
+
+
+def read_json(fname):
+    with open(fname, 'r') as f:
+        save = f.read()
+    return RealmGrinderSave(json.loads(save))
