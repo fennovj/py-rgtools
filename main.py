@@ -1,19 +1,16 @@
-from rgtools.rgsave import _apply_rule, RealmGrinderByteArray, RealmGrinderSave
-from rgtools.resources import get_formats, decode_save
+from rgtools.save import read_save
 
-import json
 
-with open('save.txt', 'r') as file:
-    save = file.read()
+def read_write(fname):
+    outname = 'saves/json/' + fname + '.json'
+    fname = 'saves/txt/' + fname + '.txt'
+    save = read_save(fname)
+    save.write(outname)
+    return save
 
-rgdata = RealmGrinderByteArray(decode_save(save))
-rgsave = RealmGrinderSave()
 
-for rule in get_formats():
-    # print("Now applying rule {}".format(rule))
-    _apply_rule(rule, rgsave, rgdata)
-    with open('save.json', 'w') as file:
-        file.write(json.dumps(rgsave.save,
-                              sort_keys=True,
-                              indent=4,
-                              separators=(',', ': ')))
+save = read_write('r133_recent')
+
+for i in range(35, 41):
+    print(i)
+    print(save['stats'][i])
